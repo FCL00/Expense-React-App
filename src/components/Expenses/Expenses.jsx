@@ -1,9 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import "./Expenses.css";
 import ExpenseItem from "./ExpenseItem";
+import ExpensesFilter from "./ExpensesFilter";
 
 function Expenses(props) {
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  };
+
   const displayExpensesItem = (expense) => {
     return (
       <ExpenseItem
@@ -15,7 +23,15 @@ function Expenses(props) {
     );
   };
 
-  return <div className="expenses">{props.items.map(displayExpensesItem)}</div>;
+  return (
+    <div className="expenses">
+      <ExpensesFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
+      />
+      {props.items.map(displayExpensesItem)}
+    </div>
+  );
 }
 
 export default Expenses;

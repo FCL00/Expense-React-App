@@ -1,28 +1,44 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
   const titleChangeHandler = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setEnteredTitle(value);
   };
 
   const amountChangeHandler = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setEnteredAmount(value);
   };
 
   const dateChangeHandler = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setEnteredDate(value);
   };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const incomingData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+    props.onSubmitDataHandler(incomingData);
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>

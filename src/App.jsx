@@ -23,10 +23,14 @@ function App() {
     },
   ];
 
+  function addExpense(expenseData) {
+    console.log(expenseData);
+  }
+
   return (
     <div>
       <h2>Lets get started!</h2>
-      <NewExpense />
+      <NewExpense onAddEpxense={addExpense} />
       <Expenses items={expenses} />
     </div>
   );
