@@ -8,16 +8,6 @@ import ExpensesFilter from "./ExpensesFilter";
 function Expenses(props) {
   const [filteredYear, setFilteredYear] = useState("2022");
 
-  let filteredInfoText = "2022";
-
-  if (filteredYear === "2022") {
-    filteredInfoText = "2023";
-  } else if (filteredYear === "2023") {
-    filteredInfoText = "2022";
-  } else {
-    filteredInfoText = "2022";
-  }
-
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
@@ -35,7 +25,6 @@ function Expenses(props) {
 
   return (
     <div className="expenses">
-      <p>data from {filteredInfoText} is hidden</p>
       <ExpensesFilter
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
@@ -46,6 +35,19 @@ function Expenses(props) {
 }
 
 export default Expenses;
+
+// the derived compute state will be use inside the Expenses function
+// let filteredInfoText = "2022";
+
+//   if (filteredYear === "2022") {
+//     filteredInfoText = "2023";
+//   } else if (filteredYear === "2023") {
+//     filteredInfoText = "2022";
+//   } else {
+//     filteredInfoText = "2022";
+//   }
+
+// <p>data from {filteredInfoText} is hidden</p>
 
 {
   /* <ExpenseItem
