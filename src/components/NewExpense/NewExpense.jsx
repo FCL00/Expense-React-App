@@ -4,6 +4,14 @@ import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 
 function NewExpense(prop) {
+  const [isEditing, SetisEditing] = useState(false);
+
+  function isEditingHandler() {
+    SetisEditing((prevValue) => {
+      return !prevValue;
+    });
+  }
+
   function saveExpenseDataHandler(enteredExpenseData) {
     const expenseData = {
       id: Math.random().toString(),
@@ -14,7 +22,12 @@ function NewExpense(prop) {
 
   return (
     <div className="new-expense">
-      <ExpenseForm onSubmitDataHandler={saveExpenseDataHandler} />
+      {!isEditing && (
+        <button onClick={isEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm onSubmitDataHandler={saveExpenseDataHandler} />
+      )}
     </div>
   );
 }
